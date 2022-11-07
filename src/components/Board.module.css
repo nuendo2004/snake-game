@@ -1,0 +1,15 @@
+.cell {
+  width: 20px;
+  height: 20px;
+  outline: 1px solid rgba(166, 165, 165, 0.618);
+  background-color: #fff;
+}
+.board {
+  display: grid;
+  max-width: 800px;
+  margin: auto;
+  border: 2px solid red;
+  justify-content: center;
+  background-color: black;
+  padding: 3px;
+}
