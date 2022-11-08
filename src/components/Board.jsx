@@ -14,6 +14,8 @@ const Board = () => {
   const dispatch = useDispatch();
   const boardViewSize = useRef();
 
+  const snakeHead = useSelector((state) => state.snake);
+
   const resizeBoard = (height, width) => {
     if (height / cellPixel < height || width / cellPixel < width) {
       dispatch(setHeight(Math.floor(height / cellPixel) - 6));
@@ -54,12 +56,21 @@ const Board = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [windowSize.height, windowSize.width, row, col]);
-  console.log(windowSize.height, windowSize.width);
 
   const renderGrid = (grid) => {
-    console.log("rendergrid");
     return grid.map((cell) => {
-      return <div className={styles.cell} key={`${cell.row}_${cell.col}`} />;
+      const isSnake = () => {
+        return (
+          cell.row === snakeHead.head.value[0] &&
+          cell.col === snakeHead.head.value[1]
+        );
+      };
+      return (
+        <div
+          className={`${styles.cell} ${isSnake() ? styles.snake : ""}`}
+          key={`${cell.row}_${cell.col}`}
+        />
+      );
     });
   };
 
